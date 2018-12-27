@@ -15,9 +15,11 @@ namespace DatingApp.API.Data
         public  async Task<User> Login(string username, string password)
         {   
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
-
-            if(user==null)
+            Console.WriteLine("*********User name from db is: *************"+ user.Username);
+            if(user==null){
+            Console.WriteLine("************IF WE ARE HERE user is null*************");
                 return null;
+                }
             
             if(!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
                 return null;
@@ -30,11 +32,13 @@ namespace DatingApp.API.Data
              using(var hmac = new System.Security.Cryptography.HMACSHA512())
             {
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                for(int i=0; i<computedHash.Length; i++){
+                for(int i=0; i<computedHash.Length; i++)
+                {
                     if(computedHash[i] != passwordHash[i]) {return false;}
                 }
+                return true;
             }
-            return true;
+            
         }
 
         public async Task<User> Register(User user, string password)
