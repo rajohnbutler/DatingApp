@@ -46,8 +46,7 @@ namespace DatingApp.API.Controllers
 
         [HttpPost("login")]
        
-        public async Task<IActionResult> Login([FromBody]UserForLoginDto userForLoginDto)
-            
+        public async Task<IActionResult> Login([FromBody]UserForLoginDto userForLoginDto) 
         {   
             System.Console.WriteLine("user dto obj: "+userForLoginDto.Username); //*This Prints username correctly
             System.Console.WriteLine("password dto obj: "+userForLoginDto.Password); //*This Prints password correctly
@@ -60,7 +59,6 @@ namespace DatingApp.API.Controllers
                 return Unauthorized();
             }
             
-
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
