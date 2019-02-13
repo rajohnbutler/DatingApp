@@ -48,14 +48,15 @@ namespace DatingApp.API.Controllers
        
         public async Task<IActionResult> Login([FromBody]UserForLoginDto userForLoginDto) 
         {   
-            System.Console.WriteLine("user dto obj: "+userForLoginDto.Username); //*This Prints username correctly
-            System.Console.WriteLine("password dto obj: "+userForLoginDto.Password); //*This Prints password correctly
+            // System.Console.WriteLine("user dto obj: "+userForLoginDto.Username); //*This Prints username correctly
+            // System.Console.WriteLine("password dto obj: "+userForLoginDto.Password); //*This Prints password correctly
+
             var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
 
             //System.Console.WriteLine("username is: "+ userFromRepo.Username); //*This Line Cause Null Pointer Exception */
             
             if(userFromRepo ==null){
-                System.Console.WriteLine("******** IF WE ARE HERE UserFromRepo IS null"); //this prints confirming userFromRepo is null
+                //System.Console.WriteLine("******** IF WE ARE HERE UserFromRepo IS null"); //this prints confirming userFromRepo is null
                 return Unauthorized();
             }
             
